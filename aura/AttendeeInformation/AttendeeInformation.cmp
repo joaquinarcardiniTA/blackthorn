@@ -1,0 +1,51 @@
+<aura:component implements="force:appHostable" controller="AttendeeInformationLtng">
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:attribute name="lstAttendeeWrapper" type="List"/>
+    
+    <!--code to display Attendee Information-->
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Event Start Date</th>
+                <th>Event End Date</th>
+                <th>Attendee Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration var="objAttendeeWrapper" items="{!v.lstAttendeeWrapper}">
+                <tr>
+                    <td>
+                        <a target="_blank" href="{!'/' + objAttendeeWrapper.objEvent.Id}">{!objAttendeeWrapper.objEvent.Name}</a>
+                    </td>
+                    <td><ui:outputDate value="{!objAttendeeWrapper.objEvent.EM_Demo__Event_Start_Date__c}"/></td>
+                    <td><ui:outputDate value="{!objAttendeeWrapper.objEvent.EM_Demo__Event_End_Date__c}"/></td>
+                    <td>
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Company</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!objAttendeeWrapper.lstAttendee}" var="objAttendee">
+                                    <tr>
+                                        <td>{!objAttendee.FirstName}</td>
+                                        <td><a target="_blank" href="{!'/' + objAttendee.Id}">{!objAttendee.LastName}</a></td>
+                                        <td>{!objAttendee.Email}</td>
+                                        <td>{!objAttendee.MobilePhone}</td>
+                                        <td>{!objAttendee.Company}</td>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>

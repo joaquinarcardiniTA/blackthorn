@@ -1,0 +1,106 @@
+<apex:page docType="html-5.0" controller="LandingPageController" cache="false" sidebar="false" showheader="false" standardStylesheets="false">
+    <html>
+        <head>
+            <apex:slds />
+            <style>
+                html {
+                    font-family: "Salesforce Sans",Arial,sans-serif !important;
+                }
+                .contentarea{
+                    width: 100%;
+                    max-width: 1200px;
+                    margin: 1rem auto 3rem;
+                }
+                .slds-scope .slds-card__header {
+                    padding: .75rem 1rem 0.75rem;
+                    margin: 0 0 .75rem;
+                    background: #f4f6f9;
+                    text-align: left;
+                }
+                .slds-scope .slds-table th, .slds-scope .slds-table td{
+                    white-space: normal;
+                }
+            </style>
+        </head>
+        <body>
+            <apex:form styleclass="form-horizontal form_wrapper" id="form2">
+                <div id="loader" style="display: none">
+                    <div class="slds-spinner_container slds-is-fixed" >
+                        <div role="" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contentarea">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-col_padded">
+                            <div class="slds-card ">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>Events Summary </span>
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-card__body ">
+                                    <div class="tablewrapper slds-scrollable">
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Event Name
+                                                    </th>
+                                                    <th>
+                                                        Event Start Date
+                                                    </th>
+                                                    <th>
+                                                        Event End Date
+                                                    </th>
+                                                    <th style="text-align: center;" >
+                                                        Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <apex:repeat value="{!lstEvent}" var="objEvent">
+                                                    <tr>
+                                                        <td>
+                                                            {!objEvent.Name}
+                                                        </td>
+                                                        <td>
+                                                            <apex:outputText value="{0,date, MM/dd/YYYY}">
+                                                                <apex:param value="{!objEvent.Event_Start_Date__c}"/>
+                                                            </apex:outputText>
+                                                        </td>
+                                                        <td>
+                                                            <apex:outputText value="{0,date, MM/dd/YYYY}">
+                                                                <apex:param value="{!objEvent.Event_End_Date__c}"/>
+                                                            </apex:outputText>
+                                                        </td>
+                                                        <td style="text-align: center;">
+                                                            <button type="button" class="slds-button slds-button--brand" onclick="OpenRegistrationPage('{!objEvent.Id}')" value="Registration">Register</button>
+                                                        </td>
+                                                    </tr>
+                                                </apex:repeat>
+                                          </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function OpenRegistrationPage(eventId){
+                        window.location.href='/apex/EM_Demo__Registration_Page?id='+eventId;
+                    }
+                </script>
+            </apex:form>
+        </body>
+        
+    </html>
+</apex:page>

@@ -1,0 +1,142 @@
+<apex:page docType="html-5.0" cache="false" controller="RegistrationController" sidebar="false" showheader="false" standardStylesheets="false">
+    <html>
+        <head>
+            <title>Registration</title>
+            <apex:slds />
+            <style>
+                html {
+                    font-family: "Salesforce Sans",Arial,sans-serif !important;
+                }
+                .contentarea{
+                    width: 100%;
+                    max-width: 480px;
+                    margin: 1rem auto 3rem;
+                }
+                .slds-scope .slds-card__header {
+                    padding: .75rem 1rem 0.75rem;
+                    margin: 0 0 .75rem;
+                    background: #f4f6f9;
+                    text-align: left;
+                }
+                .slds-scope .slds-form-element__label{
+                    font-size: .9rem;
+                }
+            </style>
+        </head>
+        <body>
+            <apex:form styleclass="form-horizontal form_wrapper" id="form2">
+                <apex:pageMessages />
+                <apex:actionStatus id="sts">
+                    <apex:facet name="start">
+                    <div class="slds-spinner_container slds-is-fixed" >
+                        <div role="" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                    </apex:facet>
+                </apex:actionStatus>
+                <div class="contentarea">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-col_padded">
+                            <div class="slds-card ">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>Registration </span>
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-card__body ">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-col_padded slds-m-bottom_medium">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label">First Name </label>
+                                                <div class="slds-form-element__control">
+                                                    <apex:inputText styleclass="slds-input" value="{!firstName}"/>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        <div class="slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-col_padded slds-m-bottom_medium">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label">Last Name </label>
+                                                <div class="slds-form-element__control">
+                                                    <apex:inputText styleclass="slds-input" value="{!lastName}"/>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>  
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-col_padded slds-m-bottom_medium">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label">Email</label>
+                                                <div class="slds-form-element__control">
+                                                    <apex:inputText styleclass="slds-input" value="{!emailAddress}"/>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        
+                                        <div class="slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-col_padded slds-m-bottom_medium">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label">Company</label>
+                                                <div class="slds-form-element__control">
+                                                    <apex:inputText styleclass="slds-input" value="{!company}"/>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>    
+                                    <div class="slds-grid slds-wrap">
+                                        
+                                        <div class="slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-col_padded slds-m-bottom_medium">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label">Mobile</label>
+                                                <div class="slds-form-element__control">
+                                                    <apex:inputText styleclass="slds-input" value="{!mobilePhone}"/>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        <div class="slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-col_padded slds-m-bottom_medium"></div>
+                                    </div>
+
+                                    <div class="slds-m-top_x-small slds-m-bottom_large" style="text-align: center">
+                                        <button class="slds-button slds-button_neutral " type="button" value="Back" onclick="window.location.href='/apex/Landing_Page'" style="margin-right: 8px">Back</button>
+                                        <apex:commandButton styleClass="slds-button slds-button--brand "  value="Submit" action="{!createLead}" reRender="form2" status="sts" oncomplete="openModal();"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </apex:form>
+        </body>
+    </html>
+    <!--Modal Box-->
+    <div>
+        <section role="dialog" tabindex="-1" id="modalBox" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal">
+            <div class="slds-modal__container" >
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Event Registered</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <p style="font-size:18px;color:green;">
+                        Registration is done successfully
+                    </p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button type="button" class="slds-button slds-button_neutral" onclick="window.location.href='/apex/EM_Demo__Landing_Page'">Close</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop" id="modalBackground"></div>
+    </div>
+    
+    <script>
+        function openModal(){
+            document.getElementById('modalBox').classList += ' slds-fade-in-open';
+            document.getElementById('modalBackground').classList += ' slds-backdrop_open';
+        }
+    </script>
+</apex:page>
